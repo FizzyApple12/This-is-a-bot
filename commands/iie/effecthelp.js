@@ -41,7 +41,7 @@ exports.run = function (callback, bot, msg, args, IIE) {
         }
     }
 
-    messageSanitizer.sendChannel(msg, {
+    messageSanitizer.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             author: {

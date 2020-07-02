@@ -38,7 +38,7 @@ exports.run = function (bot, msg, args) {
                 })
             }
         });
-        messageSanitizer.sendChannel(msg, {
+        messageSanitizer.sendChannel(msg, "", {
             embed: {
                 color: 6697881,
                 author: {
@@ -125,7 +125,7 @@ exports.run = function (bot, msg, args) {
 	    });
     }
 
-    messageSanitizer.sendChannel(msg, {
+    messageSanitizer.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             author: {

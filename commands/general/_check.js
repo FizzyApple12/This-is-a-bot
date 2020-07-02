@@ -35,11 +35,11 @@ exports.run = function (bot, msg, args, stat, music, serverPrefs) {
             }
             try {
                 serverPrefs.findOne({ id: msg.guild.id }, (err2, res2) => {
-                    if (err2 || !res2) messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, false, null));
-                    else messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, true, res2));
+                    if (err2 || !res2) messageSanitizer.sendChannel(msg, "", statUtils.generateCard(msg, res, totalXP, false, null));
+                    else messageSanitizer.sendChannel(msg, "", statUtils.generateCard(msg, res, totalXP, true, res2));
                 });
             } catch (e) {
-                messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, false, null));
+                messageSanitizer.sendChannel(msg, "", statUtils.generateCard(msg, res, totalXP, false, null));
             }
         } else {
             messageSanitizer.reply(msg, "Cannot find that user in my database. Check your id or tag");

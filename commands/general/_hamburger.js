@@ -7,7 +7,7 @@ var ffmpeg = require('fluent-ffmpeg');
 
 exports.run = function (bot, msg, args) {
 	if (args[1] == undefined || args[1] == "help" || args[1] == "") {
-        messageSanitizer.sendChannel(msg, {
+        messageSanitizer.sendChannel(msg, "", {
             embed: {
                 color: 6697881,
                 author: {

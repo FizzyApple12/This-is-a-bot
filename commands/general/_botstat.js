@@ -49,7 +49,7 @@ exports.run = function (bot, msg, args, stat) {
                 inline: true
             }
         ]
-        messageSanitizer.sendChannel(msg, {
+        messageSanitizer.sendChannel(msg, "", {
             embed: {
                 color: 6697881,
                 author: {

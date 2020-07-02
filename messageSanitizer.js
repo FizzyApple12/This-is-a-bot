@@ -4,6 +4,9 @@ const config = module.require('./config.json');
 module.exports.sendChannel = (msg, message, opts) => {
     var filteredMessage = message;
 
+    console.log(message)
+    console.log(opts)
+
     filteredMessage = filteredMessage.replace(/<@(!|&)[0-9]*>/g, (match) => {
         var replaceWith = "";
 

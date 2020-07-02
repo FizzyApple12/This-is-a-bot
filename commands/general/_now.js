@@ -3,7 +3,7 @@ const config = module.require('../../config.json');
 const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stat, music) {
-    messageSanitizer.sendChannel(msg, {
+    messageSanitizer.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             author: {

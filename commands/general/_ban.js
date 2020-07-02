@@ -45,7 +45,7 @@ exports.run = function (bot, msg, args) {
         return user.id == personToBan
     });
 
-    messageSanitizer.sendChannel(msg, {
+    messageSanitizer.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             title: "**BANNED USER:**\n" + personToBanName,

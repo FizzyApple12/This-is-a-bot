@@ -13,7 +13,7 @@ exports.run = function (bot, msg, args, stat, music) {
             "value": song
         });
     });
-    messageSanitizer.sendChannel(msg, {
+    messageSanitizer.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             author: {

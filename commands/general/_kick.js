@@ -45,7 +45,7 @@ exports.run = function (bot, msg, args) {
         return user.id == personToKick
     });
 
-    messageSanitizer.sendChannel(msg, {
+    messageSanitizer.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             title: "**KICKED USER:**\n" + personToKickName,
