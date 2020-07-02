@@ -1,5 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args) {
     var page;
@@ -37,7 +38,7 @@ exports.run = function (bot, msg, args) {
                 })
             }
         });
-        msg.channel.send({
+        messageSanitizer.sendChannel(msg, {
             embed: {
                 color: 6697881,
                 author: {
@@ -124,7 +125,7 @@ exports.run = function (bot, msg, args) {
 	    });
     }
 
-    msg.channel.send({
+    messageSanitizer.sendChannel(msg, {
         embed: {
             color: 6697881,
             author: {

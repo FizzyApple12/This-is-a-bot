@@ -2,10 +2,11 @@ const { floor } = require("mathjs");
 
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stats, music, serverPrefs) {
     if (msg.author.id != config.ownerID) {
-        msg.channel.send("How about no <@!" + msg.author.id + ">?");
+        messageSanitizer.sendChannel(msg, "How about no <@!" + msg.author.id + ">?");
         return;
     }
 
@@ -25,16 +26,16 @@ exports.run = function (bot, msg, args, stats, music, serverPrefs) {
             return dtc == args[1]
         });
         personToModify = id;
-    } else return msg.channel.send("No user specified, please specify a user to give points.");
+    } else return messageSanitizer.sendChannel(msg, "No user specified, please specify a user to give points.");
 
     if (args[2] && !isNaN(args[2])) pointModification = parseInt(args[2]);
-    else return msg.channel.send("No number specified, please specify the number of points to give the user.");
+    else return messageSanitizer.sendChannel(msg, "No number specified, please specify the number of points to give the user.");
 
-    if (pointModification <= 1) return msg.channel.send("You must specify a positive number of points to give the user.");
+    if (pointModification <= 1) return messageSanitizer.sendChannel(msg, "You must specify a positive number of points to give the user.");
 
     try {
         serverPrefs.findOne({ id: msg.guild.id }, (err2, res2) => {
-            if (err2 || !res2) return msg.channel.send('You are not inside a server, please move to a server and try again.');
+            if (err2 || !res2) return messageSanitizer.sendChannel(msg, 'You are not inside a server, please move to a server and try again.');
             else {
                 var modifications = {};
                 modifications[`serverPoints.${msg.guild.id}`] = pointModification;
@@ -44,10 +45,10 @@ exports.run = function (bot, msg, args, stats, music, serverPrefs) {
             }
         });
     } catch (e) {
-        msg.channel.send('You are not inside a server, please move to a server and try again.');
+        messageSanitizer.sendChannel(msg, 'You are not inside a server, please move to a server and try again.');
     }
 
-    msg.channel.send(`Gave <@!${personToModify}> ${pointModification} point${(pointModification == 1) ? '' : 's'}!`);
+    messageSanitizer.sendChannel(msg, `Gave <@!${personToModify}> ${pointModification} point${(pointModification == 1) ? '' : 's'}!`);
 }
 
 exports.info = {

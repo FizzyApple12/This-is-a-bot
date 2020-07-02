@@ -1,12 +1,13 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 var fs = require('fs');
 var ffmpeg = require('fluent-ffmpeg');
 
 exports.run = function (bot, msg, args) {
 	if (args[1] == undefined || args[1] == "help" || args[1] == "") {
-        msg.channel.send({
+        messageSanitizer.sendChannel(msg, {
             embed: {
                 color: 6697881,
                 author: {
@@ -48,7 +49,7 @@ exports.run = function (bot, msg, args) {
         });
     } else {
         var burgerID = makeBurgerid();
-        msg.channel.send(`Compiling ${burgerID}...`);
+        messageSanitizer.sendChannel(msg, `Compiling ${burgerID}...`);
         var order = [];
         var input = args[1];
         var validOrder = true;
@@ -75,20 +76,20 @@ exports.run = function (bot, msg, args) {
             } else if (input[i] == "r") {
                 order.push(newDir+"hamburger/r.wav");
             } else {
-                msg.channel.send(`\`\`\`\n${input}\r${" ".repeat(i)}^ Cannot find ingredient "${input[i]}"\n\`\`\``);
+                messageSanitizer.sendChannel(msg, `\`\`\`\n${input}\r${" ".repeat(i)}^ Cannot find ingredient "${input[i]}"\n\`\`\``);
                 validOrder = false;
                 break;
             }
         }
         
         if (validOrder) {
-            msg.channel.send(`Building ${burgerID}...`);
+            messageSanitizer.sendChannel(msg, `Building ${burgerID}...`);
             var finalFile = ffmpeg();
             order.forEach(path => {
                 finalFile = finalFile.input(path);
             });
             finalFile.mergeToFile(burgerID + '.wav').on('end', function() {
-                msg.channel.send(`Done building ${burgerID}!`, {
+                messageSanitizer.sendChannel(msg, `Done building ${burgerID}!`, {
                     files: [{
                         attachment: newDir + burgerID + '.wav',
                         name: burgerID + ".wav"

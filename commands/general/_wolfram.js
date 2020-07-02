@@ -1,5 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 const request = require("request");
 
@@ -9,9 +10,9 @@ exports.run = function (bot, msg, args) {
 
     request(`http://api.wolframalpha.com/v1/simple?appid=5XU3UL-QY574TGQRP&i=${question}%3F`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            msg.reply(`http://api.wolframalpha.com/v1/simple?appid=5XU3UL-QY574TGQRP&i=${question}%3F`);
+            messageSanitizer.reply(msg, `http://api.wolframalpha.com/v1/simple?appid=5XU3UL-QY574TGQRP&i=${question}%3F`);
         } else {
-            msg.reply(body);
+            messageSanitizer.reply(msg, body);
         }
     });
 }

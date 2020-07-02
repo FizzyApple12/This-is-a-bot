@@ -1,10 +1,11 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (callback, bot, msg, args, IIE) {
     if (args.length >= 2) {
         // if (!args[1].match(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)\b([/|.|\w|\s|-])*\.(?:jpg|gif|png))/)) {
-        //     msg.reply("Couldn't find a valid URL, please list one with this command.");
+        //     messageSanitizer.reply(msg, "Couldn't find a valid URL, please list one with this command.");
         //     return;
         // }
         var found = false;
@@ -16,9 +17,9 @@ exports.run = function (callback, bot, msg, args, IIE) {
         });
 
         if (!found) IIE.userImages.push({"userid": msg.author.id, "image": arg[1]});
-        msg.reply("Registered your image!")
+        messageSanitizer.reply(msg, "Registered your image!")
     } 
-    else if (args.length < 2) msg.reply("Couldn't find your URL, please list one with this command.");
+    else if (args.length < 2) messageSanitizer.reply(msg, "Couldn't find your URL, please list one with this command.");
     callback();
 }
 

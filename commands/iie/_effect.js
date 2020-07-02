@@ -2,6 +2,7 @@ const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
 var request = require('request');
 var fs = require('fs');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (callback, bot, msg, args, IIE) {
     var found = false;
@@ -14,14 +15,14 @@ exports.run = function (callback, bot, msg, args, IIE) {
     });
 
     if (!found) {
-        msg.reply("Could not find an image selected by you, please use ``$$$image`` with an attached image to select one.");
+        messageSanitizer.reply(msg, "Could not find an image selected by you, please use ``$$$image`` with an attached image to select one.");
         return;
     }
 
     var effect = IIE.effects.find(effectI => effectI.info.name === args[1]);
 
     if (!effect) {
-        msg.reply(`Could not find the effect named "${args[1]}"`);
+        messageSanitizer.reply(msg, `Could not find the effect named "${args[1]}"`);
         return;
     }
 
@@ -37,11 +38,11 @@ exports.run = function (callback, bot, msg, args, IIE) {
             effect.apply(filepath, effectargs, e => {
                 if (e) { 
                     console.log(e);
-                    msg.reply(`Failed to edit image:\n\`\`\`${e}\`\`\``);
+                    messageSanitizer.reply(msg, `Failed to edit image:\n\`\`\`${e}\`\`\``);
                     fs.unlinkSync(filepath);
                     return;
                 }
-                msg.reply("Here is the edited image.", { 
+                messageSanitizer.reply(msg, "Here is the edited image.", { 
                     files: [
                         filepath
                     ] 

@@ -1,6 +1,7 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
 const statUtils = module.require('../../programLogic/statsUtils');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stat, music, serverPrefs) {
     var content = msg.content.substring(config.prefix.length);
@@ -26,7 +27,7 @@ exports.run = function (bot, msg, args, stat, music, serverPrefs) {
     else personToCheck = msg.author.id;
 
     stat.findOne({ id: personToCheck }, (err, res) => {
-        if (err) msg.reply("Error retrieving data from MongoDB.");
+        if (err) messageSanitizer.reply(msg, "Error retrieving data from MongoDB.");
         if (res) {
             var totalXP = res.xp;
             for (var j = 0; j < res.level - 1; j++) {
@@ -34,14 +35,14 @@ exports.run = function (bot, msg, args, stat, music, serverPrefs) {
             }
             try {
                 serverPrefs.findOne({ id: msg.guild.id }, (err2, res2) => {
-                    if (err2 || !res2) msg.channel.send(statUtils.generateCard(msg, res, totalXP, false, null));
-                    else msg.channel.send(statUtils.generateCard(msg, res, totalXP, true, res2));
+                    if (err2 || !res2) messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, false, null));
+                    else messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, true, res2));
                 });
             } catch (e) {
-                msg.channel.send(statUtils.generateCard(msg, res, totalXP, false, null));
+                messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, false, null));
             }
         } else {
-            msg.reply("Cannot find that user in my database. Check your id or tag");
+            messageSanitizer.reply(msg, "Cannot find that user in my database. Check your id or tag");
         }
     });
 }

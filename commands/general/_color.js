@@ -1,6 +1,7 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
 const statUtils = module.require('../../programLogic/statsUtils');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stat, music, serverPrefs) {
     if (!isNaN(args[1]) && !isNaN(args[2]) && !isNaN(args[3])) { //9437439
@@ -10,7 +11,7 @@ exports.run = function (bot, msg, args, stat, music, serverPrefs) {
             }
         });
         stat.findOne({ id: msg.author.id }, (err, res) => {
-            if (err) msg.reply("Error retrieving data from MongoDB.");
+            if (err) messageSanitizer.reply(msg, "Error retrieving data from MongoDB.");
             if (res) {
                 var totalXP = res.xp;
                 for (var j = 0; j < res.level - 1; j++) {
@@ -18,18 +19,18 @@ exports.run = function (bot, msg, args, stat, music, serverPrefs) {
                 }
                 try {
                     serverPrefs.findOne({ id: msg.guild.id }, (err2, res2) => {
-                        if (err2 || !res2) msg.channel.send(statUtils.generateCard(msg, res, totalXP, false, null));
-                        else msg.channel.send(statUtils.generateCard(msg, res, totalXP, true, res2));
+                        if (err2 || !res2) messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, false, null));
+                        else messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, true, res2));
                     });
                 } catch (e) {
-                    msg.channel.send(statUtils.generateCard(msg, res, totalXP, false, null));
+                    messageSanitizer.sendChannel(msg, statUtils.generateCard(msg, res, totalXP, false, null));
                 }
             } else {
-                msg.reply("Cannot find you in my database!");
+                messageSanitizer.reply(msg, "Cannot find you in my database!");
             }
         });
     } else {
-        msg.reply("Oops, you may have used that wrong, proper usage is: ``" + config.prefix + exports.info.usage + "``");
+        messageSanitizer.reply(msg, "Oops, you may have used that wrong, proper usage is: ``" + config.prefix + exports.info.usage + "``");
     }
 }
 

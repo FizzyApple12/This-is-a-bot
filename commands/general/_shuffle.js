@@ -1,8 +1,9 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stat, music) {
-    msg.channel.send("Toggled shuffle to " + music.toggleShuffle());
+    messageSanitizer.sendChannel(msg, "Toggled shuffle to " + music.toggleShuffle());
 }
 
 exports.info = {

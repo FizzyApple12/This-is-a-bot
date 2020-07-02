@@ -1,5 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 const math = require('mathjs');
 const parser = math.parser();
@@ -9,12 +10,12 @@ exports.run = function (bot, msg, args) {
     try {
         var answer = math.derivative(args[2], args[1]);
         if (answer) {
-            msg.reply("the derivative of ``" + args[2] + "`` using variable ``" + args[1] + "`` is ``" + answer + "``");
+            messageSanitizer.reply(msg, "the derivative of ``" + args[2] + "`` using variable ``" + args[1] + "`` is ``" + answer + "``");
         } else {
-            msg.reply("Hmmm... " + args[2] + " does not appear to be a valid expression...");
+            messageSanitizer.reply(msg, "Hmmm... " + args[2] + " does not appear to be a valid expression...");
         }
     } catch (e) {
-        msg.reply("Hmmm... " + args[2] + " does not appear to be a valid expression...");
+        messageSanitizer.reply(msg, "Hmmm... " + args[2] + " does not appear to be a valid expression...");
     }
 }
 

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-global.bot = new Discord.Client();
+global.bot = new Discord.Client({ disableEveryone: true, disableMentions: 'all' });
 const configPrivate = new require('./configPrivate.json');
 
 global.appRoot = __dirname

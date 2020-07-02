@@ -1,5 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 const math = require('mathjs');
 const parser = math.parser();
@@ -9,12 +10,12 @@ exports.run = function (bot, msg, args) {
     try {
         var answer = math.intersect([parseFloat(args[1]), parseFloat(args[2])], [parseFloat(args[3]), parseFloat(args[4])], [parseFloat(args[5]), parseFloat(args[6])], [parseFloat(args[7]), parseFloat(args[8])]);
         if (answer) {
-            msg.reply("The intersection between lines ``" + args[1] + ", " + args[2] + "`` to ``" + args[3] + ", " + args[4] + "`` and ``" + args[5] + ", " + args[6] + "`` to ``" + args[7] + ", " + args[8] + "`` is at ``" + answer + "``");
+            messageSanitizer.reply(msg, "The intersection between lines ``" + args[1] + ", " + args[2] + "`` to ``" + args[3] + ", " + args[4] + "`` and ``" + args[5] + ", " + args[6] + "`` to ``" + args[7] + ", " + args[8] + "`` is at ``" + answer + "``");
         } else {
-            msg.reply("Hmmm... ``" + args[1] + ", " + args[2] + "`` to ``" + args[3] + ", " + args[4] + "`` and/or ``" + args[5] + ", " + args[6] + "`` to ``" + args[7] + ", " + args[8] + "`` do not appear to be valid or intersecting lines...");
+            messageSanitizer.reply(msg, "Hmmm... ``" + args[1] + ", " + args[2] + "`` to ``" + args[3] + ", " + args[4] + "`` and/or ``" + args[5] + ", " + args[6] + "`` to ``" + args[7] + ", " + args[8] + "`` do not appear to be valid or intersecting lines...");
         }
     } catch (e) {
-        msg.reply("Hmmm... ``" + args[1] + ", " + args[2] + "`` to ``" + args[3] + ", " + args[4] + "`` and/or ``" + args[5] + ", " + args[6] + "`` to ``" + args[7] + ", " + args[8] + "`` do not appear to be valid or intersecting lines...");
+        messageSanitizer.reply(msg, "Hmmm... ``" + args[1] + ", " + args[2] + "`` to ``" + args[3] + ", " + args[4] + "`` and/or ``" + args[5] + ", " + args[6] + "`` to ``" + args[7] + ", " + args[8] + "`` do not appear to be valid or intersecting lines...");
     }
 }
 

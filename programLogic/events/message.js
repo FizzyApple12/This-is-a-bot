@@ -1,4 +1,5 @@
 const config = new require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 module.exports = async function (msg, DBI, music, IIE) {
     if (msg.author.id == bot.user.id) return;
@@ -29,7 +30,7 @@ module.exports = async function (msg, DBI, music, IIE) {
                     if (userVer.aid == msg.author.id) {
                         if (msg.content.toLowerCase() == userVer.vid) {
                             bot.verifications.splice(index, 1);
-                            msg.reply(`Verified! Have fun at **${currentServerConfig.name}**`);
+                            messageSanitizer.reply(msg, `Verified! Have fun at **${currentServerConfig.name}**`);
                             msg.member.removeRole(msg.guild.roles.get(currentServerConfig.config.verificationChannel.roleid));
                             if (currentServerConfig.config.verificationChannel.finalroleid != null) msg.member.addRole(msg.guild.roles.get(currentServerConfig.config.verificationChannel.finalroleid));
                         } else {
@@ -198,17 +199,6 @@ module.exports = async function (msg, DBI, music, IIE) {
 
     args[0] = args[0].toLowerCase();
 
-    var pingedSomeone = false;
-
-    args.forEach(arg => {
-        if (arg.includes("@")) pingedSomeone = true;
-    })
-
-    if (pingedSomeone) {
-        msg.channel.send('Sorry about this, but at the moment, you are not allowed to ping people in commands. Please check back later once a better fix has been completed.')
-        return msg.react(bot.emojis.get('587386664012480522'));
-    }
-
     var ownerCommand = bot.ownerCommands.find(command => command.info.name === args[0]);
     var generalCommand = bot.generalCommands.find(command => command.info.name === args[0]);
     var iieCommand = bot.iieCommands.find(command => command.info.name === args[0]);
@@ -226,7 +216,7 @@ module.exports = async function (msg, DBI, music, IIE) {
                 msg.react(bot.emojis.get('587386664104755210'));
 	        } catch (e) {
 		        msg.react(bot.emojis.get('587386664012480522'));
-                msg.reply(`That command threw the error: \`\`\`${e}\`\`\``);
+                messageSanitizer.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
                 console.log("COMMAND ERROR:");
                 console.log(e);
             }
@@ -235,7 +225,7 @@ module.exports = async function (msg, DBI, music, IIE) {
         } else {
 	        loadReact.remove();
 	        msg.react(bot.emojis.get('587386664012480522'));
-            msg.channel.send(`I'm sorry <@${msg.author.id}>, I'm afraid I cant let you do that.`);
+            messageSanitizer.sendChannel(msg, `I'm sorry <@${msg.author.id}>, I'm afraid I cant let you do that.`);
             return;
         }
     }
@@ -245,7 +235,7 @@ module.exports = async function (msg, DBI, music, IIE) {
 	        msg.react(bot.emojis.get('587386664104755210'));
 	    } catch (e) {
 	        msg.react(bot.emojis.get('587386664012480522'));
-            msg.reply(`That command threw the error: \`\`\`${e}\`\`\``);
+            messageSanitizer.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
             console.log("COMMAND ERROR:");
             console.log(e);
         }
@@ -261,7 +251,7 @@ module.exports = async function (msg, DBI, music, IIE) {
 	    } catch (e) {
             loadReact.remove();
 	        msg.react(bot.emojis.get('587386664012480522'));
-            msg.reply(`That command threw the error: \`\`\`${e}\`\`\``);
+            messageSanitizer.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
             console.log("COMMAND ERROR:");
             console.log(e);
         }

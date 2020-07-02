@@ -1,5 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stat, music) {
     var songList = [];
@@ -12,7 +13,7 @@ exports.run = function (bot, msg, args, stat, music) {
             "value": song
         });
     });
-    msg.channel.send({
+    messageSanitizer.sendChannel(msg, {
         embed: {
             color: 6697881,
             author: {

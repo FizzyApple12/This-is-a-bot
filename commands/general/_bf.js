@@ -2,6 +2,7 @@ const message = require("../../programLogic/events/message");
 
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 // modified from: https://github.com/treker7/brainfuck-interpreter/blob/master/brainfuckInterpreter.js
 // I was too lazy to write my own.
@@ -62,7 +63,7 @@ var compile = (bfSourceCode) => {
 
 
 exports.run = async function (bot, msg, args) {
-    return msg.channel.send("brainfuck has been disabled while I work in a better implementation");
+    return messageSanitizer.sendChannel(msg, "brainfuck has been disabled while I work in a better implementation");
     init();
     var jsCode = compile(args[1]);
     var timedOut = true;
@@ -75,11 +76,11 @@ exports.run = async function (bot, msg, args) {
         timedOut = false;
 
         if (output.includes("@")) {
-            msg.channel.send('Ok, while I applaud the effort for creating a brainfuck program that pings, I am going to have to disallow that. Amazing work though.')
+            messageSanitizer.sendChannel(msg, 'Ok, while I applaud the effort for creating a brainfuck program that pings, I am going to have to disallow that. Amazing work though.')
             return msg.react(bot.emojis.get('728284525926547466'));
         }
 
-        msg.channel.send(output);
+        messageSanitizer.sendChannel(msg, output);
     });
 }
 

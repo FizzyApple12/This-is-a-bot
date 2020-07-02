@@ -1,5 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 const request = require("request");
 
@@ -8,7 +9,7 @@ exports.run = function (bot, msg, args) {
     request('http://api.giphy.com/v1/gifs/trending?api_key=ox196Ej6TcRtsGmP6ICDAXyPVepRytuk&limit=100', (error, response, body) => {
         if (!error && response.statusCode == 200) {
             var info = JSON.parse(body);
-            msg.reply("Giphy trending gif: ", {
+            messageSanitizer.reply(msg, "Giphy trending gif: ", {
                 file: info.data[Math.floor(Math.random() * (info.data.length - 1))].images.original.url,
             });
         }

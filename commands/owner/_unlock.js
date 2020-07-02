@@ -1,8 +1,9 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
+const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args, stat, music, serverPrefs) {
-    msg.channel.send("```diff\n- !!!SERVER LOCKDOWN!!! -\n-     UNLOCKING...     -\n```").then((newMSG) => {
+    messageSanitizer.sendChannel(msg, "```diff\n- !!!SERVER LOCKDOWN!!! -\n-     UNLOCKING...     -\n```").then((newMSG) => {
         try {
             serverPrefs.updateOne({ id: msg.guild.id }, {
                 $set: {
