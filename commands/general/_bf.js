@@ -5,8 +5,8 @@ const config = module.require('../../config.json');
 const messageSanitizer = module.require('../../messageSanitizer.js');
  
 const runBrainfuckCode = async (code, callback) => {
-    var mem_arr = [];
-    var data_ptr = 0;
+    var memory = [];
+    var pointer = 0;
     var infiniteCheck = 0;
     var output = "";
     var jsSourceCode = '';
@@ -16,26 +16,26 @@ const runBrainfuckCode = async (code, callback) => {
 
         switch (currBfInstr) {
             case '>':
-                jsSourceCode += 'data_ptr++;';
+                jsSourceCode += 'pointer++;';
                 break;
             case '<':
-                jsSourceCode += 'data_ptr--;';
+                jsSourceCode += 'pointer--;';
                 break;
             case '+':
-                jsSourceCode += 'if (!mem_arr[data_ptr]) mem_arr[data_ptr] = 0; mem_arr[data_ptr] += 1;';
+                jsSourceCode += 'if (!memory[pointer]) memory[pointer] = 0; memory[pointer] += 1;';
                 break;
             case '-':
-                jsSourceCode += 'if (!mem_arr[data_ptr]) mem_arr[data_ptr] = 0; mem_arr[data_ptr] -= 1;';
+                jsSourceCode += 'if (!memory[pointer]) memory[pointer] = 0; memory[pointer] -= 1;';
                 break;
             case '.':
-                jsSourceCode += 'output += String.fromCharCode(mem_arr[data_ptr]);';
+                jsSourceCode += 'output += String.fromCharCode(memory[pointer]);';
                 break;
             case ',':
-                // jsSourceCode += 'mem_arr[data_ptr] = readline.question().charCodeAt(0);';
+                // jsSourceCode += 'memory[pointer] = readline.question().charCodeAt(0);';
                 // disable input as this has no way of being done as of now
                 break;
             case '[':
-                jsSourceCode += 'while(mem_arr[data_ptr]) {';
+                jsSourceCode += 'while(memory[pointer]) {';
                 break;
             case ']':
                 jsSourceCode += `infiniteCheck++; if (infiniteCheck >= 1000) break; } infiniteCheck = 0;`;
