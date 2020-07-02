@@ -1,7 +1,7 @@
 const Discord = module.require("discord.js");
 const config = module.require('./config.json');
 
-module.exports.sendChannel = (msg, message) => {
+module.exports.sendChannel = (msg, message, opts) => {
     var filteredMessage = message;
 
     filteredMessage = filteredMessage.replace(/<@(!|&)[0-9]*>/g, (match) => {
@@ -26,10 +26,10 @@ module.exports.sendChannel = (msg, message) => {
         return replaceWith;
     });
 
-    return msg.channel.send(filteredMessage)
+    return msg.channel.send(filteredMessage, opts)
 }
 
-module.exports.reply = (msg, message) => {
+module.exports.reply = (msg, message, opts) => {
     var filteredMessage = message;
 
     filteredMessage = filteredMessage.replace(/<@(!|&)[0-9]*>/g, (match) => {
@@ -54,5 +54,5 @@ module.exports.reply = (msg, message) => {
         return replaceWith;
     });
 
-    return msg.reply(filteredMessage)
+    return msg.reply(filteredMessage, opts)
 }

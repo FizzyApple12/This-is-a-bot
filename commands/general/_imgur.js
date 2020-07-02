@@ -10,10 +10,14 @@ exports.run = function (bot, msg, args) {
     var query = args[1].replace(/ /g, '+');
     request({ url: 'https://api.imgur.com/3/gallery/search?q=' + query, headers: { 'Authorization': 'Client-ID 9b737057c864c9b' } }, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            var info = JSON.parse(body);
-            messageSanitizer.reply(msg, "Imgur picture with query " + args[1] + ": ", {
-                file: info.data[Math.floor(Math.random() * (info.data.length - 1))].images[0].link,
-            });
+            try {
+                var info = JSON.parse(body);
+                messageSanitizer.reply(msg, "Imgur picture with query " + args[1] + ": ", {
+                    file: info.data[Math.floor(Math.random() * (info.data.length - 1))].images[0].link,
+                });
+            } catch (e) {
+                messageSanitizer.reply(msg, "Could not find any images with query " + args[1]);
+            }
         }
     });
 }

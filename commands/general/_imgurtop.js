@@ -9,11 +9,15 @@ exports.run = function (bot, msg, args) {
     console.log(msg.author.tag + " searched for a picture with query " + args[1] + " from Imgur");
     var query = args[1].replace(/ /g, '+');
     request({ url: 'https://api.imgur.com/3/gallery/search?q=' + query, headers: { 'Authorization': 'Client-ID 9b737057c864c9b' } }, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-            var info = JSON.parse(body);
-            messageSanitizer.reply(msg, "Imgur search " + args[1] + ": ", {
-                file: info.data[0].images[0].link,
-            });
+        try {
+            if (!error && response.statusCode == 200) {
+                var info = JSON.parse(body);
+                messageSanitizer.reply(msg, "Imgur search " + args[1] + ": ", {
+                    file: info.data[0].images[0].link,
+                });
+            }
+        } catch (e) {
+            messageSanitizer.reply(msg, "Could not find any images with query " + args[1]);
         }
     });
 }
