@@ -2,7 +2,7 @@ const config = new require('../../config.json');
 const messageSanitizer = module.require('../../messageSanitizer.js');
 
 module.exports = async function (msg, DBI, music, IIE) {
-    if (msg.author.id == bot.user.id) return;
+    if (msg.author.bot) return;
 
     try {
         if (msg.mentions.everyone || msg.mentions.members.has(bot.user.id)) {
