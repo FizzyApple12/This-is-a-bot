@@ -141,6 +141,300 @@
                     </table>
                 </div>
             </div>
+            <div class="call-category">
+                <h1 class="name">economy</h1>
+            </div>
+            <div class="call-container">
+                <div class="method type-get">
+                    <h1 class="title">GET economy/get</h1>
+                    <p class="url">URL: http://thisisabot.com/api/economy/get/{UserID}</p>
+                </div>
+                <div class="function">
+                    <h1 class="title">Function:</h1>
+                    <p class="description">Gets the balance of a user.</p>
+                </div>
+                <div class="parameters">
+                    <h1 class="title">Parameters:</h1>
+                    <table class="parameter-table">
+                        <tr>
+                            <th class="name">Name</th>
+                            <th class="type">Type</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="name">UserID</td>
+                            <td class="type">string</td>
+                            <td class="description">Discord's ID for the user you want to retrieve the balance of.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">token (body)</td>
+                            <td class="type">string</td>
+                            <td class="description">The EconomyAPI token for the server.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="returns">
+                    <h1 class="title">Returns:</h1>
+                    <table class="returns-table">
+                        <tr>
+                            <th class="code">Code</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="code">200</td>
+                            <td class="description">This is a bot found the user's balance and sent it back in a JSON object.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">401</td>
+                            <td class="description">The EconomyAPI token you provided is invalid.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">404</td>
+                            <td class="description">This is a bot could not find the balance for the user specified.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="examples">
+                    <h1 class="title">Examples:</h1>
+                    <p class="example"></p>
+                    <table class="examples-table">
+                        <tr>
+                            <th class="url">URL</th>
+                            <th class="action">Action</th>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/get/460891988191870976</td>
+                            <td class="action">Gets This is a bot's balance.</td>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/get/313385355049041921</td>
+                            <td class="action">Gets FizzyApple12's balance.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="call-container">
+                <div class="method type-post">
+                    <h1 class="title">POST economy/set</h1>
+                    <p class="url">URL: http://thisisabot.com/api/economy/set/{UserID}</p>
+                </div>
+                <div class="function">
+                    <h1 class="title">Function:</h1>
+                    <p class="description">Sets the balance of a user.</p>
+                </div>
+                <div class="parameters">
+                    <h1 class="title">Parameters:</h1>
+                    <table class="parameter-table">
+                        <tr>
+                            <th class="name">Name</th>
+                            <th class="type">Type</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="name">UserID</td>
+                            <td class="type">string</td>
+                            <td class="description">Discord's ID for the user you want to retrieve the balance of.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">token (body)</td>
+                            <td class="type">string</td>
+                            <td class="description">The EconomyAPI token for the server.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">balance (body)</td>
+                            <td class="type">number</td>
+                            <td class="description">The value to set the user's balance to.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="returns">
+                    <h1 class="title">Returns:</h1>
+                    <table class="returns-table">
+                        <tr>
+                            <th class="code">Code</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="code">200</td>
+                            <td class="description">This is a bot found the user's balance and set it.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">401</td>
+                            <td class="description">The EconomyAPI token you provided is invalid.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">404</td>
+                            <td class="description">This is a bot could not set the balance of the user specified.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="examples">
+                    <h1 class="title">Examples:</h1>
+                    <p class="example"></p>
+                    <table class="examples-table">
+                        <tr>
+                            <th class="url">URL</th>
+                            <th class="action">Action</th>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/set/460891988191870976</td>
+                            <td class="action">Sets This is a bot's balance.</td>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/set/313385355049041921</td>
+                            <td class="action">Sets FizzyApple12's balance.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="call-container">
+                <div class="method type-post">
+                    <h1 class="title">POST economy/add</h1>
+                    <p class="url">URL: http://thisisabot.com/api/economy/add/{UserID}</p>
+                </div>
+                <div class="function">
+                    <h1 class="title">Function:</h1>
+                    <p class="description">Adds the amount specified to the balance of a user.</p>
+                </div>
+                <div class="parameters">
+                    <h1 class="title">Parameters:</h1>
+                    <table class="parameter-table">
+                        <tr>
+                            <th class="name">Name</th>
+                            <th class="type">Type</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="name">UserID</td>
+                            <td class="type">string</td>
+                            <td class="description">Discord's ID for the user you want to modify.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">token (body)</td>
+                            <td class="type">string</td>
+                            <td class="description">The EconomyAPI token for the server.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">modification (body)</td>
+                            <td class="type">number</td>
+                            <td class="description">The value to add to the user's balance.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="returns">
+                    <h1 class="title">Returns:</h1>
+                    <table class="returns-table">
+                        <tr>
+                            <th class="code">Code</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="code">200</td>
+                            <td class="description">This is a bot found the user's balance and added to it.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">401</td>
+                            <td class="description">The EconomyAPI token you provided is invalid.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">404</td>
+                            <td class="description">This is a bot could not add to the balance of the user specified.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="examples">
+                    <h1 class="title">Examples:</h1>
+                    <p class="example"></p>
+                    <table class="examples-table">
+                        <tr>
+                            <th class="url">URL</th>
+                            <th class="action">Action</th>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/add/460891988191870976</td>
+                            <td class="action">Add to This is a bot's balance.</td>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/add/313385355049041921</td>
+                            <td class="action">Add to FizzyApple12's balance.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="call-container">
+                <div class="method type-post">
+                    <h1 class="title">POST economy/subtract</h1>
+                    <p class="url">URL: http://thisisabot.com/api/economy/subtract/{UserID}</p>
+                </div>
+                <div class="function">
+                    <h1 class="title">Function:</h1>
+                    <p class="description">Subtracts the amount specified from the balance of a user.</p>
+                </div>
+                <div class="parameters">
+                    <h1 class="title">Parameters:</h1>
+                    <table class="parameter-table">
+                        <tr>
+                            <th class="name">Name</th>
+                            <th class="type">Type</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="name">UserID</td>
+                            <td class="type">string</td>
+                            <td class="description">Discord's ID for the user you want to modify.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">token (body)</td>
+                            <td class="type">string</td>
+                            <td class="description">The EconomyAPI token for the server.</td>
+                        </tr>
+                        <tr>
+                            <td class="name">modification (body)</td>
+                            <td class="type">number</td>
+                            <td class="description">The value to subtract from the user's balance.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="returns">
+                    <h1 class="title">Returns:</h1>
+                    <table class="returns-table">
+                        <tr>
+                            <th class="code">Code</th>
+                            <th class="description">Description</th>
+                        </tr>
+                        <tr>
+                            <td class="code">200</td>
+                            <td class="description">This is a bot found the user's balance and subtracted from it.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">401</td>
+                            <td class="description">The EconomyAPI token you provided is invalid.</td>
+                        </tr>
+                        <tr>
+                            <td class="code">404</td>
+                            <td class="description">This is a bot could not subtract from balance of the user specified.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="examples">
+                    <h1 class="title">Examples:</h1>
+                    <p class="example"></p>
+                    <table class="examples-table">
+                        <tr>
+                            <th class="url">URL</th>
+                            <th class="action">Action</th>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/subtract/460891988191870976</td>
+                            <td class="action">Subtract from This is a bot's balance.</td>
+                        </tr>
+                        <tr>
+                            <td class="url">http://thisisabot.com/api/economy/subtract/313385355049041921</td>
+                            <td class="action">Subtract from FizzyApple12's balance.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
 </html>

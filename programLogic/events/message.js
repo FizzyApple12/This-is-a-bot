@@ -75,6 +75,10 @@ module.exports = async function (msg, DBI, music, IIE) {
                         "channelid": "",
                         "setChannel": false
                     },
+                    "economyAPI": {
+                        "enabled": false,
+                        "key": ""
+                    },
                     "locked": false,
                     "pointName": "Server Point"
                 }

@@ -19,7 +19,7 @@
         <meta name="twitter:image" content="http://thisisabot.com/assets/boticon.png">
         <meta name="twitter:card" content="app">
 
-        <link rel="shortcut icon" type="image/png" href="http://indev.fizzyapple12.com/assets/favicon.png">
+        <link rel="shortcut icon" type="image/png" href="http://thisisabot.com/assets/favicon.png">
 
         <title>This is a bot</title>
 
@@ -221,6 +221,22 @@
                                         <label class="col-form-label" for="pointnameset">Currency Name:</label>
                                         <input type="text" class="form-control" placeholder="Currency Name" id="pointnameset" onkeyup="currentConfig.pointName=document.getElementById('pointnameset').value; updateCFG();">
 
+                                    </div>
+                                </div>
+                                
+                                <div class="card border-dark mb-3">
+                                    <div class="card-header">Economy API</div>
+                                    <div class="card-body">
+
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="economyapienable" onclick="currentConfig.economyAPI.enabled=document.getElementById('economyapienable').checked; updateCFG();">
+                                            <label class="custom-control-label" for="economyapienable">Enable Economy API</label>
+                                        </div><br>
+
+                                        <label class="col-form-label" for="economyapikey">API Key:</label>
+                                        <input type="text" class="form-control" placeholder="You need to generate an API Key" id="economyapikey" readonly>
+
+                                        <button class="btn btn-outline-danger" onclick="regenerateAPIKey()">Regenerate API Key</button>
                                     </div>
                                 </div>
 

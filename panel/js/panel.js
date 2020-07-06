@@ -105,6 +105,9 @@ var renderConfig = () => {
                             document.getElementById('lock').checked = currentConfig.locked;
 
                             document.getElementById('pointnameset').value = currentConfig.pointName;
+
+                            document.getElementById('economyapienable').checked = currentConfig.economyAPI.enabled;
+                            document.getElementById('economyapikey').value = currentConfig.economyAPI.key;
                             
                             app.configLoading = false;
                         }
@@ -202,4 +205,16 @@ var logout = (reload) => {
     localStorage.setItem("SessionID", null);
     app.loggedIn = false;
     if (reload) window.location.reload();
+}
+
+var regenerateAPIKey = () => {
+    var key = '';
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < 48; i++) {
+        key += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    currentConfig.economyAPI.key = key;
+    document.getElementById('economyapikey').value = key; 
+    updateCFG();
 }

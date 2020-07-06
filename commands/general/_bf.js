@@ -38,7 +38,7 @@ const runBrainfuckCode = async (code, callback) => {
                 jsSourceCode += 'while(memory[pointer]) {';
                 break;
             case ']':
-                jsSourceCode += `infiniteCheck++; if (infiniteCheck >= 1000) break; } infiniteCheck = 0;`;
+                jsSourceCode += `infiniteCheck++; if (infiniteCheck >= 500) break; }`;
                 break;
             default:
         }
