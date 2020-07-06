@@ -39,8 +39,8 @@ exports.run = function (bot, msg, args, stat) {
                 inline: true
             },
             {
-                name: "Current Heartbeat\nPing",
-                value: bot.ping.toString(),
+                name: "Discord Latency",
+                value: `${Math.round(bot.ping)}ms`,
                 inline: true
             },
             {
