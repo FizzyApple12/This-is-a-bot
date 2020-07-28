@@ -7,3 +7,4 @@ webPanelUsers.json
 serverPrefs.json
 uno.json
 connections.txt
+process.env
