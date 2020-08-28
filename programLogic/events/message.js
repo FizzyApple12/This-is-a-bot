@@ -5,7 +5,7 @@ module.exports = async function (msg, DBI, music, IIE) {
     if (msg.author.bot) return;
 
     try {
-        if (msg.mentions.everyone || msg.mentions.members.has(bot.user.id)) {
+        if (msg.mentions.everyone || msg.mentions.members.has(bot.user.id) || msg.mentions.members.has(config.ownerID)) {
 	        msg.react(bot.emojis.get('636983330973417492'));
         }
     } catch (e) {
