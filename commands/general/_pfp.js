@@ -28,7 +28,7 @@ exports.run = function (bot, msg, args) {
     console.log(bot.users)
     let user = bot.users.find('id', personToCheck);
 
-    messageSanitizer.reply(msg, user.avatarURL);
+    messageSanitizer.sendChannel(msg, user.avatarURL);
 }
 
 exports.info = {
