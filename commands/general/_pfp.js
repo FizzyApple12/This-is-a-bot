@@ -34,6 +34,6 @@ exports.run = function (bot, msg, args) {
 exports.info = {
     name: 'pfp',
     usage: 'pfp [user id, tag, or @]',
-    description: 'description',
-    category: "category"
+    description: 'Sends the full profile picture of a user',
+    category: "images"
 };
