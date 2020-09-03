@@ -25,7 +25,6 @@ exports.run = function (bot, msg, args) {
     }
     else personToCheck = msg.author.id;
 
-    console.log(bot.users)
     let user = bot.users.find('id', personToCheck);
 
     messageSanitizer.sendChannel(msg, user.avatarURL);
