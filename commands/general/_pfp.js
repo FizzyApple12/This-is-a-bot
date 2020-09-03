@@ -27,7 +27,8 @@ exports.run = function (bot, msg, args) {
 
     let user = bot.users.find('id', personToCheck);
 
-    messageSanitizer.sendChannel(msg, user.avatarURL);
+    if (user) messageSanitizer.sendChannel(msg, user.avatarURL);
+    else messageSanitizer.sendChannel(msg, 'Could not find that user.');
 }
 
 exports.info = {
