@@ -27,8 +27,12 @@ exports.run = function (callback, bot, msg, args, IIE) {
     }
 
     var fileName = IIE.makeImageid();
+    
+    var folderpath = `${appRoot}/innerImageEditor/imagecache/`;
 
-    var filepath = `${appRoot}/innerImageEditor/imagecache/${fileName}.${IIE.userImages[foundIndex].image.split('.')[IIE.userImages[foundIndex].image.split('.').length - 1]}`
+    if (!fs.existsSync(folderpath)) fs.mkdirSync(folderpath);
+
+    var filepath = `${folderpath}${fileName}.${IIE.userImages[foundIndex].image.split('.')[IIE.userImages[foundIndex].image.split('.').length - 1]}`
     var effectargs = args;
     effectargs.shift();
     effectargs.shift();

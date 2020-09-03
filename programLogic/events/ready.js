@@ -20,5 +20,5 @@ const changeColor = () => {
 
 const changeMark = () => {
     var act = config.marks[Math.floor(Math.random() * config.marks.length)];
-    bot.user.setActivity(act.text, { type: act.type })
+    bot.user.setActivity(act.text, { type: act.type });
 }
