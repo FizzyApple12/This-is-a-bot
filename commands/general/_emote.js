@@ -3,7 +3,6 @@ const config = module.require('../../config.json');
 const messageSanitizer = module.require('../../messageSanitizer.js');
 
 exports.run = function (bot, msg, args) {
-    console.log(args)
     if (!args[1] || !args[1].match(/<(a|):.+:/)) return messageSanitizer.sendChannel(msg, 'That is not a valid emote')
 
     let processedEmote = args[1].replace(/<(a|):.+:/, '')
