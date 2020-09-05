@@ -22,7 +22,7 @@ exports.run = function (bot, msg, args) {
 
 exports.info = {
     name: 'giphyid',
-    usage: 'gihpyid "[id]"',
+    usage: 'giphyid "[id]"',
     description: 'Returns a gif with specified id from giphy',
     category: "images"
 };

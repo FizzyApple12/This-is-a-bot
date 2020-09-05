@@ -24,7 +24,7 @@ exports.run = function (bot, msg, args) {
 
 exports.info = {
     name: 'giphy',
-    usage: 'gihpy "[search query]"',
+    usage: 'giphy "[search query]"',
     description: 'Returns a gif from giphy',
     category: "images"
 };
