@@ -24,7 +24,7 @@
     "gm": "^1.23.1",
     "mathjs": "^5.8.0",
     "mongodb": "^3.5.5",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^1.19.1",
     "opusscript": "0.0.6",
     "path": "^0.12.7",
