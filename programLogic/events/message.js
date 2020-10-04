@@ -1,5 +1,5 @@
 const config = new require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 module.exports = async function (msg, DBI, music, IIE) {
     if (msg.author.bot) return;
@@ -30,7 +30,7 @@ module.exports = async function (msg, DBI, music, IIE) {
                     if (userVer.aid == msg.author.id) {
                         if (msg.content.toLowerCase() == userVer.vid) {
                             bot.verifications.splice(index, 1);
-                            messageSanitizer.reply(msg, `Verified! Have fun at **${currentServerConfig.name}**`);
+                            messageUtils.reply(msg, `Verified! Have fun at **${currentServerConfig.name}**`);
                             msg.member.removeRole(msg.guild.roles.get(currentServerConfig.config.verificationChannel.roleid));
                             if (currentServerConfig.config.verificationChannel.finalroleid != null) msg.member.addRole(msg.guild.roles.get(currentServerConfig.config.verificationChannel.finalroleid));
                         } else {
@@ -79,6 +79,7 @@ module.exports = async function (msg, DBI, music, IIE) {
                         "enabled": false,
                         "key": ""
                     },
+                    "trackingWords": [],
                     "locked": false,
                     "pointName": "Server Point"
                 }
@@ -147,7 +148,8 @@ module.exports = async function (msg, DBI, music, IIE) {
                     quote: "You can set your quote by using $quote",
                     username: msg.author.username,
                     iconurl: msg.author.avatarURL,
-                    serverPoints: serverPoints
+                    serverPoints: serverPoints,
+                    wordCouter: []
                 });
             }
         });
@@ -220,7 +222,7 @@ module.exports = async function (msg, DBI, music, IIE) {
                 msg.react(bot.emojis.get('587386664104755210'));
 	        } catch (e) {
 		        msg.react(bot.emojis.get('587386664012480522'));
-                messageSanitizer.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
+                messageUtils.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
                 console.log("COMMAND ERROR:");
                 console.log(e);
             }
@@ -229,7 +231,7 @@ module.exports = async function (msg, DBI, music, IIE) {
         } else {
 	        loadReact.remove();
 	        msg.react(bot.emojis.get('587386664012480522'));
-            messageSanitizer.sendChannel(msg, `I'm sorry <@${msg.author.id}>, I'm afraid I cant let you do that.`);
+            messageUtils.sendChannel(msg, `I'm sorry <@${msg.author.id}>, I'm afraid I cant let you do that.`);
             return;
         }
     }
@@ -239,7 +241,7 @@ module.exports = async function (msg, DBI, music, IIE) {
 	        msg.react(bot.emojis.get('587386664104755210'));
 	    } catch (e) {
 	        msg.react(bot.emojis.get('587386664012480522'));
-            messageSanitizer.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
+            messageUtils.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
             console.log("COMMAND ERROR:");
             console.log(e);
         }
@@ -255,7 +257,7 @@ module.exports = async function (msg, DBI, music, IIE) {
 	    } catch (e) {
             loadReact.remove();
 	        msg.react(bot.emojis.get('587386664012480522'));
-            messageSanitizer.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
+            messageUtils.reply(msg, `That command threw the error: \`\`\`${e}\`\`\``);
             console.log("COMMAND ERROR:");
             console.log(e);
         }

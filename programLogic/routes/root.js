@@ -76,13 +76,13 @@ module.exports = function (app, bot, DBI) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                body: `client_id=${config.clientid}&client_secret=${configPrivate.clientsecret}&grant_type=authorization_code&code=${code}&redirect_uri=http%3A%2F%2Fthisisabot.com%2F&scope=identify%20guilds%20email`
-                //body: `client_id=${config.clientid}&client_secret=${configPrivate.clientsecret}&grant_type=authorization_code&code=${code}&redirect_uri=http%3A%2F%2Findev.fizzyapple12.com%2F&scope=identify%20guilds%20email`
+                //body: `client_id=${config.clientid}&client_secret=${configPrivate.clientsecret}&grant_type=authorization_code&code=${code}&redirect_uri=http%3A%2F%2Fthisisabot.com%2F&scope=identify%20guilds%20email`
+                body: `client_id=${config.clientid}&client_secret=${configPrivate.clientsecret}&grant_type=authorization_code&code=${code}&redirect_uri=http%3A%2F%2Findev.fizzyapple12.com%2F&scope=identify%20guilds%20email`
             });
         const authJson = await authReq.json();
     
         if (authJson.access_token) {
-            const userRes = await fetch(`http://discordapp.com/api/users/@me`,
+            const userRes = await fetch(`http://discord.com/api/users/@me`,
                 {
                     method: 'GET',
                     headers: {

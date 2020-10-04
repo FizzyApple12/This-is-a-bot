@@ -1,13 +1,13 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 var fs = require('fs');
 var ffmpeg = require('fluent-ffmpeg');
 
 exports.run = function (bot, msg, args) {
 	if (args[1] == undefined || args[1] == "help" || args[1] == "") {
-        messageSanitizer.sendChannel(msg, "", {
+        messageUtils.sendChannel(msg, "", {
             embed: {
                 color: 6697881,
                 author: {
@@ -49,7 +49,7 @@ exports.run = function (bot, msg, args) {
         });
     } else {
         var burgerID = makeBurgerid();
-        messageSanitizer.sendChannel(msg, `Compiling ${burgerID}...`);
+        messageUtils.sendChannel(msg, `Compiling ${burgerID}...`);
         var order = [];
         var input = args[1];
         var validOrder = true;
@@ -76,20 +76,20 @@ exports.run = function (bot, msg, args) {
             } else if (input[i] == "r") {
                 order.push(newDir+"hamburger/r.wav");
             } else {
-                messageSanitizer.sendChannel(msg, `\`\`\`\n${input}\r${" ".repeat(i)}^ Cannot find ingredient "${input[i]}"\n\`\`\``);
+                messageUtils.sendChannel(msg, `\`\`\`\n${input}\r${" ".repeat(i)}^ Cannot find ingredient "${input[i]}"\n\`\`\``);
                 validOrder = false;
                 break;
             }
         }
         
         if (validOrder) {
-            messageSanitizer.sendChannel(msg, `Building ${burgerID}...`);
+            messageUtils.sendChannel(msg, `Building ${burgerID}...`);
             var finalFile = ffmpeg();
             order.forEach(path => {
                 finalFile = finalFile.input(path);
             });
             finalFile.mergeToFile(burgerID + '.wav').on('end', function() {
-                messageSanitizer.sendChannel(msg, `Done building ${burgerID}!`, {
+                messageUtils.sendChannel(msg, `Done building ${burgerID}!`, {
                     files: [{
                         attachment: newDir + burgerID + '.wav',
                         name: burgerID + ".wav"

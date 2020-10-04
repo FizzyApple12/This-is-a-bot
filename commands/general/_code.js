@@ -1,7 +1,7 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
 var fs = require('fs');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
     var path = "";
@@ -12,17 +12,17 @@ exports.run = function (bot, msg, args) {
         path = `${appRoot}/${args[1]}`;
         path = path.replace(/\\/g, "/");
     } else {
-        messageSanitizer.reply(msg, "You must specify a file to read.")
+        messageUtils.reply(msg, "You must specify a file to read.")
         return;
     }
 
     if (path.includes("configPrivate")) {
-        messageSanitizer.reply(msg, "configPrivate.json contains sensitive data and cannot be read.")
+        messageUtils.reply(msg, "configPrivate.json contains sensitive data and cannot be read.")
         return;
     }
 
     if (path.includes("/.") || path.includes("/..") || path.includes("~")) {
-        messageSanitizer.reply(msg, "Cannot use relative symbols for security reasons.");
+        messageUtils.reply(msg, "Cannot use relative symbols for security reasons.");
         return;
     }
 
@@ -30,7 +30,7 @@ exports.run = function (bot, msg, args) {
     try {
         data = fs.readFileSync(path, 'utf8')
     } catch (e) {
-        messageSanitizer.reply(msg, `Could not find file: \`\`${path}\`\``)
+        messageUtils.reply(msg, `Could not find file: \`\`${path}\`\``)
         return;
     }
     var lines = data.split("\n");
@@ -41,24 +41,24 @@ exports.run = function (bot, msg, args) {
         lineE = parseInt(args[3]);
 
         if (lineS - 1 > lines.length || lineE > lines.length) {
-            messageSanitizer.reply(msg, 'Start line and end line must be less than the file length');
+            messageUtils.reply(msg, 'Start line and end line must be less than the file length');
             return;
         }
     
         if (lineS - 1 > lineE) {
-            messageSanitizer.reply(msg, 'Start line must be less than the end line');
+            messageUtils.reply(msg, 'Start line must be less than the end line');
             return;
         }
     }
 
     if (!isNaN(args[2]) && !isNaN(args[3])) {
-        messageSanitizer.sendChannel(msg, `Reading: \`\`${path}\`\` from line ${lineS} to line ${lineE}`);
+        messageUtils.sendChannel(msg, `Reading: \`\`${path}\`\` from line ${lineS} to line ${lineE}`);
         for (var i = lineS - 1; i < lineE; i++) {
             if (i >= lines.length) continue;
             code += lines[i] + "\n";
         }
     } else {
-        messageSanitizer.sendChannel(msg, `Reading: \`\`${path}\`\``);
+        messageUtils.sendChannel(msg, `Reading: \`\`${path}\`\``);
         lines.forEach(line => {
             code += line + "\n";
         });

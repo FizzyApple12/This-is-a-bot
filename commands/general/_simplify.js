@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 const math = require('mathjs');
 const parser = math.parser();
@@ -10,12 +10,12 @@ exports.run = function (bot, msg, args) {
     try {
         var answer = math.simplify(args[1]);
         if (answer) {
-            messageSanitizer.reply(msg, "``" + args[1] + "`` simplifies to ``" + answer + "``");
+            messageUtils.reply(msg, "``" + args[1] + "`` simplifies to ``" + answer + "``");
         } else {
-            messageSanitizer.reply(msg, "Hmmm... " + args[1] + " does not appear to be a valid expression...");
+            messageUtils.reply(msg, "Hmmm... " + args[1] + " does not appear to be a valid expression...");
         }
     } catch (e) {
-        messageSanitizer.reply(msg, "Hmmm... " + args[1] + " does not appear to be a valid expression...");
+        messageUtils.reply(msg, "Hmmm... " + args[1] + " does not appear to be a valid expression...");
     }
 }
 

@@ -1,9 +1,9 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
-    messageSanitizer.sendChannel(msg, "```" + args[1] + "```").then(newMsg => {
+    messageUtils.sendChannel(msg, "```" + args[1] + "```").then(newMsg => {
         newMsg.react('📕');
         newMsg.react('📗');
     });

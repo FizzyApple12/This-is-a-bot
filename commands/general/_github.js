@@ -1,9 +1,9 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
-    messageSanitizer.sendChannel(msg, config.githubURL);
+    messageUtils.sendChannel(msg, config.githubURL);
 }
 
 exports.info = {

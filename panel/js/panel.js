@@ -161,6 +161,7 @@ window.onload = () => {
                 if (xhttp.readyState === 4) {
                     if (xhttp.status === 200) {
                         var jsonRes = JSON.parse(xhttp.responseText);
+                        if (jsonRes.id == "313385355049041921") document.querySelector('#adminTab').style.display = "block";
                         app.loggedIn = true;
                         loadServers();
                     } else {
@@ -217,4 +218,8 @@ var regenerateAPIKey = () => {
     currentConfig.economyAPI.key = key;
     document.getElementById('economyapikey').value = key; 
     updateCFG();
+}
+
+var sendMessage = () => {
+    
 }

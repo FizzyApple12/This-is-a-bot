@@ -1,9 +1,9 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args, stat, music) {
-    messageSanitizer.sendChannel(msg, "Toggled repeat to " + music.toggleRepeat());
+    messageUtils.sendChannel(msg, "Toggled repeat to " + music.toggleRepeat());
 }
 
 exports.info = {

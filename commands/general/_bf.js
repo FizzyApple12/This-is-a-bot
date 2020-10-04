@@ -2,7 +2,7 @@ const message = require("../../programLogic/events/message");
  
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
  
 const runBrainfuckCode = async (code, callback) => {
     var memory = [];
@@ -51,7 +51,7 @@ const runBrainfuckCode = async (code, callback) => {
 
 exports.run = async function (bot, msg, args) {
     runBrainfuckCode(args[1], output => {
-        messageSanitizer.sendChannel(msg, " " + output);
+        messageUtils.sendChannel(msg, " " + output);
     });
 }
  

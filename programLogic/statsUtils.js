@@ -1,6 +1,6 @@
 const config = module.require('../config.json');
 
-exports.generateCard = (msg, userStats, totalXP, server, serverStats) => {
+exports.generateStatsCard = (msg, userStats, totalXP, server, serverStats) => {
     var feilds = [
         {
             name: "Level",

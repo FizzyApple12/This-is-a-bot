@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 const request = require("request");
 
@@ -10,9 +10,10 @@ exports.run = function (bot, msg, args) {
 
     request(`http://api.wolframalpha.com/v1/simple?appid=5XU3UL-QY574TGQRP&i=${question}%3F`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            messageSanitizer.reply(msg, `http://api.wolframalpha.com/v1/simple?appid=5XU3UL-QY574TGQRP&i=${question}%3F`);
+            let url = `http://api.wolframalpha.com/v1/simple?appid=5XU3UL-QY574TGQRP&i=${question}%3F`
+            messageUtils.sendChannel(msg, "", messageUtils.generateImageCard(msg, `Wolfram query "${question}"`, url))
         } else {
-            messageSanitizer.reply(msg, body);
+            messageUtils.reply(msg, body);
         }
     });
 }

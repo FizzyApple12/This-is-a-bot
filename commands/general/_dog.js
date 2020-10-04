@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 const request = require("request");
 
@@ -9,10 +9,8 @@ exports.run = function (bot, msg, args) {
     request('https://api.thedogapi.com/v1/images/search', (error, response, body) => {
         if (!error && response.statusCode == 200) {
             var info = JSON.parse(body);
-            /*messageSanitizer.reply(msg, "Here is a dog!", {
-                file: info[0].url,
-            });*/
-	    messageSanitizer.reply(msg, `Here is a dog!\n${info[0].url}`);
+            let url = info[0].url;
+            messageUtils.sendChannel(msg, "", messageUtils.generateImageCard(msg, `Here is a dog!`, url));
         }
     });
 }

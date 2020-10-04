@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (callback, bot, msg, args, IIE) {
     var page = 0;
@@ -14,7 +14,7 @@ exports.run = function (callback, bot, msg, args, IIE) {
     } else if (args[1] && Number.isNaN(parseInt(args[1]))) {
         var effect = IIE.effects.find(effectI => effectI.info.name === args[1]);
         if (!effect) {
-            messageSanitizer.reply(msg, `Could not find the effect named "${args[1]}"`);
+            messageUtils.reply(msg, `Could not find the effect named "${args[1]}"`);
             return;
         }
         helpable.push(effect);
@@ -41,7 +41,7 @@ exports.run = function (callback, bot, msg, args, IIE) {
         }
     }
 
-    messageSanitizer.sendChannel(msg, "", {
+    messageUtils.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             author: {

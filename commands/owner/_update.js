@@ -1,7 +1,7 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
 const childProcess = require("child_process");
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = async function (bot, msg, args, stat, music, serverPrefs, loadReact) {
     childProcess.execSync("git pull", { cwd: appRoot });

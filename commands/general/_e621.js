@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 //var Furry = require('e621');
 //var e621 = new Furry();
@@ -9,7 +9,7 @@ const request = module.require("request");
 
 exports.run = async function (bot, msg, args, stat, music, serverPrefs) {
     if (args[1] == undefined) {
-        messageSanitizer.reply(msg, "You must provide at least one tag to search by.")
+        messageUtils.reply(msg, "You must provide at least one tag to search by.")
         return;
     }
 
@@ -17,11 +17,11 @@ exports.run = async function (bot, msg, args, stat, music, serverPrefs) {
 
     if (currentServerConfig) {
         if(!currentServerConfig.config.nsfw.allow) {
-            messageSanitizer.reply(msg, "NSFW is disabled in this server.");
+            messageUtils.reply(msg, "NSFW is disabled in this server.");
             return;
         }
         if (currentServerConfig.config.nsfw.setChannel && msg.channel.id != currentServerConfig.config.nsfw.channelid) {
-            messageSanitizer.reply(msg, `You must use NSFW commands in <#${currentServerConfig.config.nsfw.channelid}>`);
+            messageUtils.reply(msg, `You must use NSFW commands in <#${currentServerConfig.config.nsfw.channelid}>`);
             return;
         }
     }
@@ -37,16 +37,15 @@ exports.run = async function (bot, msg, args, stat, music, serverPrefs) {
         if (!error && response.statusCode == 200) {
             var reply = JSON.parse(body).posts;
             if (reply.length == 0) {
-                messageSanitizer.reply(msg, "Found no results with tags: " + args[1])
+                messageUtils.reply(msg, "Found no results with tags: " + args[1])
                 return;
             }
             var randomNum = Math.floor(Math.random() * reply.length);
             // console.log(randomNum)
             // console.log(reply[randomNum].file.url)
             
-            messageSanitizer.reply(msg, "E621 image with tags: " + args[1], {
-                file: reply[randomNum].file.url,
-            });
+            let url = reply[randomNum].file.url;
+            messageUtils.sendChannel(msg, "", messageUtils.generateImageCard(msg, `e621 image with tags "${args[1]}"`, url));
         }
     });
 }

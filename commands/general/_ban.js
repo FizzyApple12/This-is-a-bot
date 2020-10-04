@@ -1,10 +1,10 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
     if (msg.author.id != config.ownerID) {
-        messageSanitizer.sendChannel(msg, "How about no <@" + msg.author.id + ">?");
+        messageUtils.sendChannel(msg, "How about no <@" + msg.author.id + ">?");
         return;
     }
 
@@ -27,7 +27,7 @@ exports.run = function (bot, msg, args) {
         });
         personToBan = id;
     } else {
-        messageSanitizer.sendChannel(msg, "No user specified, please specify a user to ban.");
+        messageUtils.sendChannel(msg, "No user specified, please specify a user to ban.");
         return;
     };
     var banReason;
@@ -45,7 +45,7 @@ exports.run = function (bot, msg, args) {
         return user.id == personToBan
     });
 
-    messageSanitizer.sendChannel(msg, "", {
+    messageUtils.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             title: "**BANNED USER:**\n" + personToBanName,

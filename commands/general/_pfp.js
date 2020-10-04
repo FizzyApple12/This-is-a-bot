@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
     var content = msg.content.substring(config.prefix.length);
@@ -27,8 +27,8 @@ exports.run = function (bot, msg, args) {
 
     let user = bot.users.find('id', personToCheck);
 
-    if (user) messageSanitizer.sendChannel(msg, user.avatarURL);
-    else messageSanitizer.sendChannel(msg, 'Could not find that user.');
+    if (user) messageUtils.sendChannel(msg, user.avatarURL);
+    else messageUtils.sendChannel(msg, 'Could not find that user.');
 }
 
 exports.info = {

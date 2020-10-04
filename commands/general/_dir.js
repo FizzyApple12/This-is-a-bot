@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
 var fs = require('fs');
 var path = require('path');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
     var path = "";
@@ -16,7 +16,7 @@ exports.run = function (bot, msg, args) {
     }
 
     if (path.includes("/.") || path.includes("/..") || path.includes("~")) {
-        messageSanitizer.reply(msg, "Cannot use relative symbols for security reasons.");
+        messageUtils.reply(msg, "Cannot use relative symbols for security reasons.");
         return;
     }
 
@@ -24,7 +24,7 @@ exports.run = function (bot, msg, args) {
     try {
         data = fs.readdirSync(path, { encoding: 'utf8', withFileTypes: true });
     } catch (e) {
-        messageSanitizer.reply(msg, `Could not find path: \`\`${path}\`\``)
+        messageUtils.reply(msg, `Could not find path: \`\`${path}\`\``)
         return;
     }
 
@@ -34,7 +34,7 @@ exports.run = function (bot, msg, args) {
         list += `${dirent.name}${(dirent.isFile()) ? "" : "/"}\n`
     });
 
-    messageSanitizer.sendChannel(msg, `Files and directories inside of: \`\`${path}\`\`\n\`\`\`${list}\`\`\``);
+    messageUtils.sendChannel(msg, `Files and directories inside of: \`\`${path}\`\`\n\`\`\`${list}\`\`\``);
 }
 
 exports.info = {

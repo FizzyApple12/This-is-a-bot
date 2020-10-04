@@ -82,13 +82,16 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#webpanel">Web Panel</a>
                         </li>
+                        <li class="nav-item" style="display: none;" id="adminTab">
+                            <a class="nav-link" data-toggle="tab" href="#admin">Admin Area</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
                             <div class="dropdown-menu" style="">
                                 <a class="dropdown-item" data-toggle="modal" data-target="#statsModal" v-if="loggedIn">Stats</a>
                                 <div class="dropdown-divider" v-if="loggedIn"></div>
-                                <a class="dropdown-item" href="https://discordapp.com/api/oauth2/authorize?client_id=460891988191870976&redirect_uri=http%3A%2F%2Fthisisabot.com%2F&response_type=code&scope=identify%20guilds%20email" v-if="!loggedIn">Log In</a>
-                                <!-- <a class="dropdown-item" href="https://discordapp.com/api/oauth2/authorize?client_id=460891988191870976&redirect_uri=http%3A%2F%2Findev.fizzyapple12.com%2F&response_type=code&scope=identify%20guilds%20email" v-if="!loggedIn">Log In</a> -->
+                                <!-- <a class="dropdown-item" href="https://discordapp.com/api/oauth2/authorize?client_id=460891988191870976&redirect_uri=http%3A%2F%2Fthisisabot.com%2F&response_type=code&scope=identify%20guilds%20email" v-if="!loggedIn">Log In</a> -->
+                                <a class="dropdown-item" href="https://discordapp.com/api/oauth2/authorize?client_id=460891988191870976&redirect_uri=http%3A%2F%2Findev.fizzyapple12.com%2F&response_type=code&scope=identify%20guilds%20email" v-if="!loggedIn">Log In</a>
                                 <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal" v-if="loggedIn">Log Out</a>
                             </div>
                         </li>
@@ -122,7 +125,7 @@
                             <div v-show="editingConfig && !configLoading && selectedConfig" class="editor">
 
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">Moderator Roles</div>
                                     <div class="card-body">
 
@@ -136,7 +139,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">Verification</div>
                                     <div class="card-body">
 
@@ -163,7 +166,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">Welcoming</div>
                                     <div class="card-body">
                                     
@@ -180,7 +183,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">NSFW</div>
                                     <div class="card-body">
                                     
@@ -202,7 +205,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">Security</div>
                                     <div class="card-body">
                                     
@@ -214,7 +217,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">Economy</div>
                                     <div class="card-body">
                                     
@@ -224,7 +227,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="card border-dark mb-3">
+                                <div class="card card-editor border-dark mb-3">
                                     <div class="card-header">Economy API</div>
                                     <div class="card-body">
 
@@ -257,6 +260,22 @@
                         <h1 class="info">No Servers Here</h1>
                     </div>
                 </div>
+                <div class="tab-pane fade show" id="admin">
+                    <div class="admin-flexbox">
+                        <div class="card card-admin border-dark">
+                            <div class="card-header">Chat</div>
+                            <div class="card-body">
+                                <label class="col-form-label" for="chatChannelID">Channel ID:</label>
+                                <input type="text" class="form-control" placeholder="Channel ID" id="chatChannelID">
+
+                                <label class="col-form-label" for="chatMessage">Message:</label>
+                                <input type="text" class="form-control" placeholder="Message" id="chatMessage"><br>
+
+                                <button class="btn btn-outline-success" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
@@ -270,6 +289,75 @@
                         </div>
                         <div class="modal-body">
                             <p>Stats cannot be previewed at this time, please run $check in a server with This is a Bot</p>
+                            <!-- <div style="border-color:#faa61a" class="de-parent">
+                                <div class="de-child">
+                                    <div class="sc-1rskabe-0 fVrdNC">
+                                        <span class="sc-1rskabe-2 eymGdD">
+                                            FizzyApple12
+                                        </span>
+                                    </div>
+                                    <span class="sc-1n3purm-1 etgCdg">
+                                        <div class="sc-1d0s8bx-0 gRSkCW">
+                                            "PogFishPogFishPogFishPogFishPogFishPogFishPogFishPogFishPogFish"
+                                        </div>
+                                    </span>
+                                    <div class="sc-1n3purm-4 kjIXJ">
+                                        <div style="grid-column:1 / 13" class="sc-15zbh4f-0 jCoYMR">
+                                            <div class="sc-15zbh4f-1 ktmsra">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    Level
+                                                </div>
+                                            </div>
+                                            <div class="sc-15zbh4f-2 bIZrol">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    80
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="grid-column:1 / 13" class="sc-15zbh4f-0 jCoYMR">
+                                            <div class="sc-15zbh4f-1 ktmsra">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    XP
+                                                </div>
+                                            </div>
+                                            <div class="sc-15zbh4f-2 bIZrol">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    4179/7200
+                                                    Total: 572979XP
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sc-15zbh4f-0 jCoYMR" style="grid-column: 1 / 13;">
+                                            <div class="sc-15zbh4f-1 ktmsra">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    Cryos (This Server's Currency)
+                                                </div>
+                                            </div>
+                                            <div class="sc-15zbh4f-2 bIZrol">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    0 Cryos
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sc-15zbh4f-0 jCoYMR" style="grid-column: 1 / 13;">
+                                            <div class="sc-15zbh4f-1 ktmsra">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    Rank(s)
+                                                </div>
+                                            </div>
+                                            <div class="sc-15zbh4f-2 bIZrol">
+                                                <div class="sc-1d0s8bx-0 gRSkCW">
+                                                    Expert
+                                                    Developer
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sc-1c8ywpk-0 iZJvxi">
+                                        <img src="https://images-ext-1.discordapp.net/external/Wjl_EnBVVtcl7Q71a4GRuwbtDUus2A5eGp0uGhkR9Qc/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/460891988191870976/7143f16cd61039a91a0c55de0ebdda1b.png" alt="Footer image" class="sc-1c8ywpk-1 dfHAfx"><span class="sc-1c8ywpk-2 kRPTln">This is a Bot#2650<span class="sc-1c8ywpk-3 lexmnv">•</span><span>Today at 01:13 PM</span></span></div><div class="sc-1n3purm-6 jqRuOv"><img src="https://cdn.discordapp.com/avatars/313385355049041921/30c9e235444923e47082fe329bb761f0.png?size=2048" alt="Thumbnail" class="sc-1n3purm-7 peLYC">
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

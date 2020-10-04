@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 const request = require("request");
 
@@ -10,12 +10,11 @@ exports.run = function (bot, msg, args) {
         try {
             if (!error && response.statusCode == 200) {
                 var info = JSON.parse(body);
-                messageSanitizer.reply(msg, "Giphy trending gif: ", {
-                    file: info.data[Math.floor(Math.random() * (info.data.length - 1))].images.original.url,
-                });
+                let url = info.data[Math.floor(Math.random() * (info.data.length - 1))].images.original.url;
+                messageUtils.sendChannel(msg, "", messageUtils.generateImageCard(msg, `Giphy trending gif`, url));
             }
         } catch (e) {
-            messageSanitizer.reply(msg, "Could not find any images with query " + args[1]);
+            messageUtils.reply(msg, "Could not find any images with query " + args[1]);
         }
     });
 }

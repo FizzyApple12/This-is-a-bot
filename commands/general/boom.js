@@ -1,9 +1,9 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args) {
-    messageSanitizer.sendChannel(msg, "```      )\n     (\n    .-`-.\n    :   :\n    :TNT:\n    :___:```").then((message1) => {setTimeout(() => {
+    messageUtils.sendChannel(msg, "```      )\n     (\n    .-`-.\n    :   :\n    :TNT:\n    :___:```").then((message1) => {setTimeout(() => {
         message1.edit("```    \\|/\n   - o -\n    /-`-.\n    :   :\n    :TNT:\n    :___:```").then((message2) => {setTimeout(() => {
             message2.edit("```    .---.\n    : | :\n    :-o-:\n    :_|_:```").then((message3) => {setTimeout(() => {
                 message3.edit("```    .---.\n    (\\|/)\n    --0--\n    (/|\\)```").then((message4) => {setTimeout(() => {

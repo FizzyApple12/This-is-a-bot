@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 const request = require("request");
 
@@ -10,11 +10,11 @@ exports.run = function (bot, msg, args) {
         request('https://8ball.delegator.com/magic/JSON/' + args[1], (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 var info = JSON.parse(body);
-                messageSanitizer.reply(msg, info.magic.answer);
+                messageUtils.reply(msg, info.magic.answer);
             }
         });
     } else {
-        messageSanitizer.reply(msg, "the Magic Eight Ball would like a question");
+        messageUtils.reply(msg, "the Magic Eight Ball would like a question");
     }
 }
 

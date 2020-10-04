@@ -1,10 +1,10 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (bot, msg, args, stat, music) {
     music.queue(args[1]);
-    messageSanitizer.sendChannel(msg, "", {
+    messageUtils.sendChannel(msg, "", {
         embed: {
             color: 6697881,
             author: {

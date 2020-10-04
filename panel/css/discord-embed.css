@@ -1,0 +1,32 @@
+.de-parent {
+    line-height: 1;
+    color: rgb(220, 221, 222);
+    font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-rendering: optimizelegibility;
+    text-size-adjust: 100%;
+    text-indent: 0px;
+    box-sizing: border-box;
+    max-width: 520px;
+    display: grid;
+    background: rgb(47, 49, 54);
+    border-radius: 4px;
+    border-left: 4px solid rgb(32, 34, 37);
+    justify-self: start;
+    align-self: start;
+}
+
+.de-child {
+    line-height: 1;
+    color: rgb(220, 221, 222);
+    font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    text-rendering: optimizelegibility;
+    text-size-adjust: 100%;
+    text-indent: 0px;
+    box-sizing: border-box;
+    display: inline-grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    padding: 0.5rem 1rem 1rem 0.75rem;
+}

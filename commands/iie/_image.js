@@ -1,6 +1,6 @@
 const Discord = module.require("discord.js");
 const config = module.require('../../config.json');
-const messageSanitizer = module.require('../../messageSanitizer.js');
+const messageUtils = module.require('../../messageUtils.js');
 
 exports.run = function (callback, bot, msg, args, IIE) {
     if (msg.attachments.size == 1) {
@@ -13,10 +13,10 @@ exports.run = function (callback, bot, msg, args, IIE) {
         });
 
         if (!found) IIE.userImages.push({"userid": msg.author.id, "image": msg.attachments.first().url});
-        messageSanitizer.reply(msg, "Registered your image!")
+        messageUtils.reply(msg, "Registered your image!")
     } 
-    else if (msg.attachments.size > 1) messageSanitizer.reply(msg, "Found too many images, please try again with only 1 image attached.");
-    else if (msg.attachments.size < 1) messageSanitizer.reply(msg, "Didn't find any images in your request, please try again with an attached image.");
+    else if (msg.attachments.size > 1) messageUtils.reply(msg, "Found too many images, please try again with only 1 image attached.");
+    else if (msg.attachments.size < 1) messageUtils.reply(msg, "Didn't find any images in your request, please try again with an attached image.");
     callback();
 }
 
