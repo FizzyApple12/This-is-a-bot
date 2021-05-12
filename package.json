@@ -22,7 +22,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "fs": "0.0.1-security",
     "gm": "^1.23.1",
-    "mathjs": "^5.8.0",
+    "mathjs": "^7.5.1",
     "mongodb": "^3.5.5",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1",
